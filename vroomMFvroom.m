@@ -6,7 +6,7 @@
 dxf = DXFtool('racetrack.dxf'); 
 clc; close all; % Stop dxf from automatically plotting
 
-% List the imported entities
+% List imported entities
 dxf.list;
 
 %% Plot Racetrack
@@ -24,7 +24,7 @@ extended_track_left = zeros(N, 2);
 extended_track_right = zeros(N, 2);
 
 for i = 1:N
-    % Find tangent with the difference between points
+    % Find tangent with difference between points
     tangent = trackpoints(mod(i,N)+1, :) - trackpoints(i, :);
     
     % Edge case
@@ -98,7 +98,7 @@ figure; hold on; grid on; axis equal;
 plot(trackpoints(:, 1), trackpoints(:, 2), 'b--', ...  
      extended_track_left(:, 1), extended_track_left(:, 2), 'r-', ... 
      extended_track_right(:, 1), extended_track_right(:, 2), 'r-'); 
-h = plot(trackpoints(1, 1), trackpoints(1, 2), 'o', 'MarkerFaceColor', 'k'); % Plot the initial position of the bike
+h = plot(trackpoints(1, 1), trackpoints(1, 2), 'o', 'MarkerFaceColor', 'k'); % Plot initial position of the bike
 xlabel('X Position (m)');
 ylabel('Y Position (m)');
 title('Zoom Zoom');
@@ -152,17 +152,17 @@ for t = 0:time_step:simulation_duration
     current_velocity = direction_to_next_point * speed;
     new_position = current_position + current_velocity * time_step;
     
-    % Check if the new position overshoots the next point and adjust if necessary
+    % Check if new position overshoots next point and adjust
     if norm(new_position - current_position) > distance_to_next_point
-        new_position = next_point; % Snap to the next point to stay on the path
-        current_velocity = [0; 0]; % Reset velocity at the new segment start
+        new_position = next_point; 
+        current_velocity = [0; 0]; 
     end
     
-    % Store the new position in the bike path and update current position
+    % Store and update positions
     bike_path = [bike_path; new_position];
     current_position = new_position;
     
-    % Plot the bike's current position
+    % Plot current position
     set(h, 'XData', current_position(1), 'YData', current_position(2)); 
     drawnow;
     
