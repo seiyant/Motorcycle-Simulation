@@ -42,12 +42,13 @@ for i = 1:N
     extended_track_left(i, :) = trackpoints(i, :) + (track_width / 2) * normal;
     extended_track_right(i, :) = trackpoints(i, :) - (track_width / 2) * normal;
 end
+
 % {
 % Plot original track and defined width
 figure;
-plot(trackpoints(:, 1), trackpoints(:, 2), 'b--', ...  
+plot(trackpoints(:, 1), trackpoints(:, 2), 'k--', ...  
      extended_track_left(:, 1), extended_track_left(:, 2), 'r-', ... 
-     extended_track_right(:, 1), extended_track_right(:, 2), 'r-'); 
+     extended_track_right(:, 1), extended_track_right(:, 2), 'b-'); 
 %plot(optimized_path(:, 1), optimized_path(:, 2), 'g-');
 xlabel('X Position (m)');
 ylabel('Y Position (m)');
@@ -95,14 +96,14 @@ time_step = 5; % Time step (s)
 
 % Plotting setup
 figure; hold on; grid on; axis equal;
-plot(trackpoints(:, 1), trackpoints(:, 2), 'b--', ...  
+plot(trackpoints(:, 1), trackpoints(:, 2), 'k--', ...  
      extended_track_left(:, 1), extended_track_left(:, 2), 'r-', ... 
-     extended_track_right(:, 1), extended_track_right(:, 2), 'r-'); 
+     extended_track_right(:, 1), extended_track_right(:, 2), 'b-'); 
 h = plot(trackpoints(1, 1), trackpoints(1, 2), 'o', 'MarkerFaceColor', 'k'); % Plot initial position of the bike
 xlabel('X Position (m)');
 ylabel('Y Position (m)');
 title('Zoom Zoom');
-legend('Track', 'Boundary', 'Bike')
+legend('Track', 'Outside Boundary', 'Inside Boundary', 'Bike')
 
 % Variables
 current_velocity = [0; 0]; 
